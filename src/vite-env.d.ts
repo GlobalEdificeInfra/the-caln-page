@@ -4,6 +4,7 @@ declare namespace JSX {
   interface IntrinsicElements {
     "conversales-convai": {
       "agent-id": string;
+      "leads-capture"?: "true" | "false";
     };
   }
 }
