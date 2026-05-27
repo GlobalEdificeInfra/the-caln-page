@@ -15,8 +15,6 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import NotFound from "./pages/NotFound";
 import EnquireNow from "@/components/EnquireNow";
-import ConversalesWidget from "@/components/ConversalesWidget";
-import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
 
 const queryClient = new QueryClient();
 
@@ -27,8 +25,6 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <EnquireNow />
-        <FloatingWhatsAppButton />
-        <ConversalesWidget />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />

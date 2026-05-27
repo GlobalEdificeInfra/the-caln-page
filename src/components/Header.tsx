@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
 import clanLogo from "@/assets/Clan.png";
@@ -6,49 +6,14 @@ import geLogo from "@/assets/GE - LOGO Gold.png";
 import greenBg from "@/assets/Green BG.jpg";
 import EnquireNow from "@/components/EnquireNow";
 
-const BUSINESS_HOURS_CONTACT = {
+const PRIMARY_CONTACT = {
   href: "tel:+919411614444",
   label: "941 161 4444",
-};
-
-const AFTER_HOURS_CONTACT = {
-  href: "tel:+918065480222",
-  label: "806 548 0222",
-};
-
-const isIstBusinessHours = () => {
-  const formatter = new Intl.DateTimeFormat("en-IN", {
-    timeZone: "Asia/Kolkata",
-    hour: "numeric",
-    hour12: false,
-  });
-  const hour = Number(formatter.format(new Date()));
-
-  return hour >= 10 && hour < 17;
 };
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showEnquirePopup, setShowEnquirePopup] = useState(false);
-  const [showBusinessHoursContact, setShowBusinessHoursContact] = useState(() =>
-    isIstBusinessHours(),
-  );
-
-  useEffect(() => {
-    const updateActiveContact = () => {
-      setShowBusinessHoursContact(isIstBusinessHours());
-    };
-
-    updateActiveContact();
-
-    const timerId = window.setInterval(updateActiveContact, 60_000);
-
-    return () => window.clearInterval(timerId);
-  }, []);
-
-  const activeContact = showBusinessHoursContact
-    ? BUSINESS_HOURS_CONTACT
-    : AFTER_HOURS_CONTACT;
 
   const menuItems = [
     { label: "About", href: "/about" },
@@ -111,14 +76,14 @@ const Header = () => {
             <div className="hidden lg:flex items-center gap-2 xl:gap-3 2xl:gap-4 flex-shrink-0">
               {/* Phone Number */}
               <a
-                href={activeContact.href}
+                href={PRIMARY_CONTACT.href}
                 className="flex items-center gap-1.5 xl:gap-2 text-luxury-gold hover:text-luxury-gold/80 transition-colors"
               >
                 <div className="w-6 h-6 xl:w-7 xl:h-7 2xl:w-8 2xl:h-8 rounded-full border-2 border-luxury-gold flex items-center justify-center">
                   <Phone className="w-3 h-3 xl:w-3.5 xl:h-3.5 2xl:w-4 2xl:h-4" />
                 </div>
                 <span className="font-sans text-xs lg:text-sm xl:text-base 2xl:text-lg font-semibold whitespace-nowrap">
-                  {activeContact.label}
+                  {PRIMARY_CONTACT.label}
                 </span>
               </a>
 
@@ -170,7 +135,7 @@ const Header = () => {
         <div className="relative z-10 flex">
           {/* Call Now Button */}
           <a
-            href={activeContact.href}
+            href={PRIMARY_CONTACT.href}
             className="flex-1 flex items-center justify-center gap-2 py-4 text-luxury-gold font-sans font-semibold text-sm uppercase tracking-wider border-r border-luxury-gold/30 hover:bg-luxury-gold/10 transition-colors"
           >
             <Phone className="w-4 h-4" />
